@@ -10,32 +10,37 @@ import Layout from '@/components/Layout';
 import SEO from '@/components/SEO';
 import FAQAccordion from '@/components/FAQAccordion';
 import { useToast } from '@/hooks/use-toast';
-import { Phone, Mail, Clock, MapPin, Calendar, ArrowRight } from 'lucide-react';
+import { Phone, Mail, Clock, MapPin, Calendar } from 'lucide-react';
+
+const PHONE_DISPLAY = '(647) 633-2335';
+const PHONE_TEL = 'tel:+16476332335';
 
 const contactMethods = [
   {
     title: 'Call Us',
-    detail: '+1 (XXX) XXX-XXXX',
+    detail: PHONE_DISPLAY,
     description: '7 AM to 10 PM, 7 days a week',
-    icon: Phone
+    icon: Phone,
+    href: PHONE_TEL,
   },
   {
     title: 'Email',
     detail: 'info@brightways.ca',
     description: 'We respond within 24 hours',
-    icon: Mail
+    icon: Mail,
+    href: 'mailto:info@brightways.ca',
   },
   {
     title: 'Service Hours',
-    detail: '7 AM - 10 PM',
+    detail: '7 AM – 10 PM',
     description: 'Available every day',
-    icon: Clock
+    icon: Clock,
   },
   {
     title: 'Service Area',
     detail: 'Greater Toronto Area',
     description: 'Including nearby cities',
-    icon: MapPin
+    icon: MapPin,
   }
 ];
 
@@ -50,7 +55,7 @@ const faqItems = [
   },
   {
     question: "How quickly can you respond?",
-    answer: "We aim to respond to service requests within 2-4 hours during business hours."
+    answer: "We aim to respond to service requests within 2–4 hours during business hours."
   },
   {
     question: "Do you charge for estimates?",
@@ -69,7 +74,7 @@ const structuredData = {
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer service",
-      "telephone": "+1-XXX-XXX-XXXX",
+      "telephone": "+16476332335",
       "email": "info@brightways.ca",
       "availableLanguage": "en"
     }
@@ -95,7 +100,6 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Basic validation
     if (!formData.fullName || !formData.phone || !formData.email || !formData.postalCode) {
       toast({
         title: "Please fill in all required fields",
@@ -104,13 +108,11 @@ export default function Contact() {
       return;
     }
 
-    // Simulate form submission
     toast({
       title: "Thanks! We will confirm shortly.",
-      description: "We'll contact you within 2-4 hours to schedule your service."
+      description: "We'll contact you within 2–4 hours to schedule your service."
     });
 
-    // Reset form
     setFormData({
       fullName: '',
       phone: '',
@@ -125,11 +127,11 @@ export default function Contact() {
   return (
     <Layout 
       title="Contact Brightways Mechanical | Book HVAC Service"
-      description="Book HVAC service or request a free quote. Fast response throughout the GTA."
+      description="Book HVAC service or request a free quote from certified technicians. Fast response throughout the Greater Toronto Area."
     >
       <SEO 
         title="Contact Brightways Mechanical | Book HVAC Service"
-        description="Book HVAC service or request a free quote. Fast response throughout the GTA."
+        description="Book HVAC service or request a free quote from certified technicians. Fast response throughout the Greater Toronto Area."
         structuredData={structuredData}
       />
 
@@ -140,9 +142,16 @@ export default function Contact() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Book Service or Request a Quote
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-white/90">
+            <p className="text-xl md:text-2xl mb-4 text-white/90">
               Tell us what you need. We respond quickly during 7 AM to 10 PM.
             </p>
+            <a
+              href={PHONE_TEL}
+              className="inline-flex items-center gap-2 text-white/90 hover:text-white text-lg font-medium transition-colors"
+            >
+              <Phone className="h-5 w-5" />
+              {PHONE_DISPLAY}
+            </a>
           </div>
         </div>
       </section>
@@ -150,20 +159,24 @@ export default function Contact() {
       {/* Contact Methods */}
       <section className="py-16">
         <div className="container px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {contactMethods.map((method, index) => {
               const Icon = method.icon;
+              const Wrapper = method.href ? 'a' : 'div';
+              const wrapperProps = method.href ? { href: method.href } : {};
               return (
-                <Card key={index} className="card-elevated text-center">
-                  <CardContent className="p-6">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary mb-4">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="font-semibold mb-2">{method.title}</h3>
-                    <p className="font-medium text-primary mb-1">{method.detail}</p>
-                    <p className="text-sm text-muted-foreground">{method.description}</p>
-                  </CardContent>
-                </Card>
+                <Wrapper key={index} {...wrapperProps} className={method.href ? 'block' : ''}>
+                  <Card className="card-elevated text-center h-full">
+                    <CardContent className="p-6">
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary mb-4">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <h3 className="font-semibold mb-2">{method.title}</h3>
+                      <p className="font-medium text-primary mb-1">{method.detail}</p>
+                      <p className="text-sm text-muted-foreground">{method.description}</p>
+                    </CardContent>
+                  </Card>
+                </Wrapper>
               );
             })}
           </div>
@@ -185,7 +198,6 @@ export default function Contact() {
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Name and Phone */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="fullName">Full Name *</Label>
@@ -209,7 +221,6 @@ export default function Contact() {
                       </div>
                     </div>
                     
-                    {/* Email and Postal Code */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="email">Email *</Label>
@@ -234,7 +245,6 @@ export default function Contact() {
                       </div>
                     </div>
                     
-                    {/* Service Type */}
                     <div>
                       <Label htmlFor="serviceType">Service Type</Label>
                       <Select onValueChange={(value) => handleInputChange('serviceType', value)}>
@@ -252,7 +262,6 @@ export default function Contact() {
                       </Select>
                     </div>
                     
-                    {/* Message */}
                     <div>
                       <Label htmlFor="message">Describe the issue</Label>
                       <Textarea 
@@ -264,7 +273,6 @@ export default function Contact() {
                       />
                     </div>
                     
-                    {/* Marketing Consent */}
                     <div className="flex items-center space-x-2">
                       <Checkbox 
                         id="marketingConsent"
@@ -292,21 +300,27 @@ export default function Contact() {
                   <CardTitle>Need Immediate Help?</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-center space-x-3 p-4 bg-primary/5 rounded-lg">
+                  <a
+                    href={PHONE_TEL}
+                    className="flex items-center space-x-3 p-4 bg-primary/5 rounded-lg hover:bg-primary/10 transition-colors"
+                  >
                     <Phone className="h-5 w-5 text-primary" />
                     <div>
                       <p className="font-semibold">Call us now</p>
-                      <p className="text-primary font-medium">+1 (XXX) XXX-XXXX</p>
+                      <p className="text-primary font-medium">{PHONE_DISPLAY}</p>
                     </div>
-                  </div>
+                  </a>
                   
-                  <div className="flex items-center space-x-3 p-4 bg-accent/5 rounded-lg">
-                    <Mail className="h-5 w-5 text-accent" />
+                  <a
+                    href="mailto:info@brightways.ca"
+                    className="flex items-center space-x-3 p-4 bg-primary/5 rounded-lg hover:bg-primary/10 transition-colors"
+                  >
+                    <Mail className="h-5 w-5 text-primary" />
                     <div>
                       <p className="font-semibold">Email us</p>
-                      <p className="text-accent font-medium">info@brightways.ca</p>
+                      <p className="text-primary font-medium">info@brightways.ca</p>
                     </div>
-                  </div>
+                  </a>
                 </CardContent>
               </Card>
 
@@ -316,24 +330,18 @@ export default function Contact() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
-                        1
+                    {[
+                      'We review your request and confirm availability',
+                      "You'll receive a call within 2–4 hours",
+                      'We schedule a convenient appointment time'
+                    ].map((step, i) => (
+                      <div key={i} className="flex items-start space-x-3">
+                        <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                          {i + 1}
+                        </div>
+                        <p className="text-sm">{step}</p>
                       </div>
-                      <p className="text-sm">We review your request and confirm availability</p>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
-                        2
-                      </div>
-                      <p className="text-sm">You'll receive a call within 2-4 hours</p>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
-                        3
-                      </div>
-                      <p className="text-sm">We schedule a convenient appointment time</p>
-                    </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
