@@ -57,7 +57,8 @@ const structuredData = {
   "description": "Heating, cooling, water heaters, IAQ, gas lines, and maintenance. Honest pricing and certified work.",
   "provider": {
     "@type": "Organization",
-    "name": "Brightways Mechanical"
+    "name": "Brightways Mechanical",
+    "telephone": "+16476332335"
   },
   "areaServed": "Greater Toronto Area, Ontario, Canada"
 };

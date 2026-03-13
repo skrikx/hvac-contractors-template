@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar } from 'lucide-react';
 
@@ -31,17 +32,21 @@ export default function CTABlock({
                 </p>
               )}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="bg-white text-primary hover:bg-white/90 px-8 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  {primaryText}
-                </Button>
-                <Button 
-                  variant="ghost" 
-                  className="border-white text-white hover:bg-white hover:text-primary px-8 py-3 rounded-xl font-semibold transition-all duration-300"
-                >
-                  {secondaryText}
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
+                <Link to="/contact">
+                  <Button className="bg-white text-primary hover:bg-white/90 px-8 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 w-full sm:w-auto">
+                    <Calendar className="h-4 w-4 mr-2" />
+                    {primaryText}
+                  </Button>
+                </Link>
+                <a href="tel:+16476332335">
+                  <Button 
+                    variant="ghost" 
+                    className="border-white text-white hover:bg-white hover:text-primary px-8 py-3 rounded-xl font-semibold transition-all duration-300 w-full sm:w-auto"
+                  >
+                    {secondaryText}
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                </a>
               </div>
             </div>
           </div>

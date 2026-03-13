@@ -65,7 +65,8 @@ const structuredData = {
   "description": "Humidifiers, filtration, and purification for healthier air.",
   "provider": {
     "@type": "Organization",
-    "name": "Brightways Mechanical"
+    "name": "Brightways Mechanical",
+    "telephone": "+16476332335"
   },
   "areaServed": "Greater Toronto Area, Ontario, Canada"
 };

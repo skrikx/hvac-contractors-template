@@ -58,6 +58,7 @@ const structuredData = {
   "name": "Brightways Mechanical",
   "description": "Certified GTA HVAC professionals focused on safety, clarity, and care.",
   "url": "https://brightways.ca",
+  "telephone": "+16476332335",
   "areaServed": "Greater Toronto Area, Ontario, Canada",
   "founder": {
     "@type": "Person",
