@@ -55,7 +55,8 @@ const structuredData = {
   "description": "Professional installs and service with clear options and pricing.",
   "provider": {
     "@type": "Organization",
-    "name": "Brightways Mechanical"
+    "name": "Brightways Mechanical",
+    "telephone": "+16476332335"
   },
   "areaServed": "Greater Toronto Area, Ontario, Canada"
 };

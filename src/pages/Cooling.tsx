@@ -51,7 +51,8 @@ const structuredData = {
   "description": "AC installs, repairs, and tune ups done right for GTA homes.",
   "provider": {
     "@type": "Organization",
-    "name": "Brightways Mechanical"
+    "name": "Brightways Mechanical",
+    "telephone": "+16476332335"
   },
   "areaServed": "Greater Toronto Area, Ontario, Canada"
 };

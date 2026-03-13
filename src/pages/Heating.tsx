@@ -63,7 +63,8 @@ const structuredData = {
   "description": "Certified heating services for GTA homes. Safe installs, repairs, and annual tune ups.",
   "provider": {
     "@type": "Organization",
-    "name": "Brightways Mechanical"
+    "name": "Brightways Mechanical",
+    "telephone": "+16476332335"
   },
   "areaServed": "Greater Toronto Area, Ontario, Canada"
 };
